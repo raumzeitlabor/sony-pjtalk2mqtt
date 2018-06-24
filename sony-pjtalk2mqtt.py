@@ -24,6 +24,7 @@ def on_message(client, userdata, msg):
       client.publish("/service/beamer/error", payload="unknown command. please pass 0, 1, ON or OFF", qos=0)
 
 client = mqtt.Client()
+client.will_set('/service/beamer/state', 'offline', 0, True)
 client.on_connect = on_connect
 client.on_message = on_message
 client.connect_async("127.0.0.1")
