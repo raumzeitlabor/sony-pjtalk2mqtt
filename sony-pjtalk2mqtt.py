@@ -4,6 +4,7 @@ import pysdcp
 import time
 
 
+lastState = ""
 projector = pysdcp.Projector('beamer.rzl')
 
 def on_connect(client, userdata, flags, rc):
@@ -13,6 +14,8 @@ def on_connect(client, userdata, flags, rc):
 def on_message(client, userdata, msg):
     payload = msg.payload
     print(payload)
+    global lastState
+    lastState = ""
     if(payload == b'ON' or payload == b'1'):
        projector.set_power(True) 
     elif (payload == b'OFF' or payload == b'0'):
@@ -20,7 +23,6 @@ def on_message(client, userdata, msg):
     else:
       client.publish("/service/beamer/error", payload="unknown command. please pass 0, 1, ON or OFF", qos=0)
 
-lastState = ""
 client = mqtt.Client()
 client.on_connect = on_connect
 client.on_message = on_message
