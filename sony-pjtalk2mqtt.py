@@ -27,7 +27,7 @@ client = mqtt.Client()
 client.will_set('/service/beamer/state', 'offline', 0, True)
 client.on_connect = on_connect
 client.on_message = on_message
-client.connect_async("127.0.0.1")
+client.connect_async("mqtt.rzl.so")
 client.loop_start()
 
 while True:
