@@ -5,7 +5,7 @@ import time
 
 
 lastState = ""
-projector = pysdcp.Projector('beamer.rzl')
+projector = pysdcp.Projector('beamer.rzl.so')
 
 def on_connect(client, userdata, flags, rc):
     print ("connected")
